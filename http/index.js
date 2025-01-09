@@ -12,6 +12,9 @@ const app = express();
 const myQueue = new Queue(cfg.queue_name, {
     redis: cfg.redis
 });
+myQueue.on('error', err => {
+    console.log(`[index]bull queue error`, err);
+})
 
 /* 引入cors */
 const cors = require('cors');

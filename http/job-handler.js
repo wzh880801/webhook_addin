@@ -10,6 +10,9 @@ const { sendCardMsg } = require('../feishu/webhook_robot');
 const myQueue = new Queue(cfg.queue_name, {
     redis: cfg.redis
 });
+myQueue.on('error', err => {
+    console.log(`[job-handler]bull queue error`, err);
+})
 
 // 增加队列的处理逻辑
 myQueue.process(async (job, done) => {

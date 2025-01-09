@@ -6,6 +6,9 @@ const { ExpressAdapter } = require("@bull-board/express");
 const cfg = require('./config');
 
 const myWebhookQueue = new Queue(cfg.queue_name, { redis: cfg.redis });
+myWebhookQueue.on('error', err => {
+    console.log(`[bull-board]bull queue error`, err);
+})
 
 const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath('/admin/queues');
