@@ -118,7 +118,7 @@ function buildCardJsonUsingTable(msg) {
 
         const labels = linq.from(Object.keys(alert.labels)).where(x => ['alertname', 'grafana_folder'].indexOf(x) === -1).toArray();
         table.body.elements[0].rows.push({
-            start: moment(alert.startsAt).tz('Asia/Shanghai').format('yyyy-MM-DD hh:mm:ss'),
+            start: moment(alert.startsAt).tz('Asia/Shanghai').format('yyyy-MM-DD HH:mm:ss'),
             status: alert.status === 'firing' ? `<text_tag color='orange'>${alert.status}</text_tag>` : `<text_tag color='green'>${alert.status}</text_tag>`,
             alert_name: alert.labels.alertname,
             grafana_folder: alert.labels.grafana_folder,
@@ -294,7 +294,7 @@ function buildSingle(alerts) {
         // if (a.status === 'firing') {
         //     _result.push(`${++i}. **Alert ${i}**`);
         // }
-        _result.push(`${++i}. 开始时间: ${moment(alert.startsAt).tz('Asia/Shanghai').format('yyyy-MM-DDThh:mm:ss+08:00')}`);
+        _result.push(`${++i}. 开始时间: ${moment(alert.startsAt).tz('Asia/Shanghai').format('yyyy-MM-DDTHH:mm:ss+08:00')}`);
         if (alert.status === 'resolved') {
             _result.push(`- 结束时间: ${alert.endsAt}`);
         }
